@@ -53,20 +53,20 @@ jobs:
       ########## end build ##########
 
       ########## start deploy ##########
-      - name: Set permissions for private key
-        run: |
-          echo "${{ env.AWS_PRIVATE_KEY }}" > key.pem
-          chmod 600 key.pem
-      - name: Pull Docker image
-        run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@your-ec2-instance-ip 'sudo docker pull your-dockerhub-username/cddemo:latest'
-      - name: Stop running container
-        run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@your-ec2-instance-ip 'sudo docker stop cddemo || true'
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@your-ec2-instance-ip 'sudo docker rm cddemo || true'
-      - name: Run new container
-        run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@your-ec2-instance-ip 'sudo docker run -d --name cddemo -p 80:3000 your-dockerhub-username/cddemo:latest'
+#      - name: Set permissions for private key
+#        run: |
+#          echo "${{ env.AWS_PRIVATE_KEY }}" > key.pem
+#          chmod 600 key.pem
+#      - name: Pull Docker image
+#        run: |
+#          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker pull your-dockerhub-username/cddemo:latest'
+#      - name: Stop running container
+#        run: |
+#          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker stop cddemo || true'
+#          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker rm cddemo || true'
+#      - name: Run new container
+#        run: |
+#          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker run -d --name cddemo -p 80:3000 your-dockerhub-username/cddemo:latest'
 
       - name: SSH Commands
         uses: appleboy/ssh-action@v0.1.6
@@ -77,10 +77,10 @@ jobs:
           port: 22
           script_stop: true
           script: |
-            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@your-ec2-instance-ip 'sudo docker pull jae518/cicd-aws:latest'
-            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@your-ec2-instance-ip 'sudo docker stop cicd-aws || true'
-            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@your-ec2-instance-ip 'sudo docker rm cicd-aws || true'
-            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@your-ec2-instance-ip 'sudo docker run -d --name cicd-aws -p 8080:8080 jae518/cicd-aws:latest'
+            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker pull jae518/cicd-aws:latest'
+            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker stop cicd-aws || true'
+            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker rm cicd-aws || true'
+            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker run -d --name cicd-aws -p 8080:8080 jae518/cicd-aws:latest'
 #            kill -9 $(ps -ef | grep java | head -n 1 | awk '{print $2}')
 #            nohup java -jar *.jar 1> /dev/null 2>&1 &
       ########## end deploy ##########
