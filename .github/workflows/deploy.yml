@@ -80,6 +80,7 @@ jobs:
             docker rm -f $(docker ps -qa)
             docker rmi jae518/cicd-aws:latest
             docker pull jae518/cicd-aws:latest
+            kill -9 $(ps -ef | grep java | head -n 1 | awk '{print $2}')
             docker-compose up -d
 
 #            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker-compose -f /root/docker-compose.yml down --rmi all'
