@@ -78,8 +78,8 @@ jobs:
           script_stop: true
           script: |
             docker-compose down
-            docker rmi ${{ secrets.DOCKER_USERNAME }}/cicd-aws:latest
-            docker pull ${{ secrets.DOCKER_USERNAME }}/cicd-aws:latest --platform linux/amd64
+#            docker rmi ${{ secrets.DOCKER_USERNAME }}/cicd-aws:latest
+#            docker pull ${{ secrets.DOCKER_USERNAME }}/cicd-aws:latest
             kill -9 $(ps -ef | grep java | head -n 1 | awk '{print $2}')
             docker-compose up -d
 
