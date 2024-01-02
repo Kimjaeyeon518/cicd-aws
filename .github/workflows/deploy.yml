@@ -78,11 +78,11 @@ jobs:
           script_stop: true
           script: |
             docker-compose down
-#            docker rmi ${{ secrets.DOCKER_USERNAME }}/cicd-aws:latest
-#            docker pull ${{ secrets.DOCKER_USERNAME }}/cicd-aws:latest
             kill -9 $(ps -ef | grep java | head -n 1 | awk '{print $2}')
             docker-compose up -d
 
+      #            docker rmi ${{ secrets.DOCKER_USERNAME }}/cicd-aws:latest
+      #            docker pull ${{ secrets.DOCKER_USERNAME }}/cicd-aws:latest
 #            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker-compose -f /root/docker-compose.yml down --rmi all'
 #            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker stop cicd-aws || true'
 #            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker rm cicd-aws || true'
