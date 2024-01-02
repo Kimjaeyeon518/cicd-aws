@@ -78,6 +78,7 @@ jobs:
           script_stop: true
           script: |
             docker-compose down
+            docker image rm ${{ secrets.DOCKER_USERNAME }}/cicd-aws:latest
             docker-compose up -d
 
       #            docker rmi ${{ secrets.DOCKER_USERNAME }}/cicd-aws:latest
