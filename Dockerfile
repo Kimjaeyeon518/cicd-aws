@@ -2,7 +2,6 @@
 FROM eclipse-temurin:21-jre-alpine
 
 COPY build/libs/cicd-aws-0.0.1-SNAPSHOT.jar app.jar
-COPY docker-compose.yaml docker-compose.yaml
 
 EXPOSE 8080
 

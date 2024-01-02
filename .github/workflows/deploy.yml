@@ -77,10 +77,11 @@ jobs:
           port: 22
           script_stop: true
           script: |
-            sudo docker-compose down --rmi all
-            sudo docker pull jae518/cicd-aws:latest
-            sudo docker-compose up -d
-            nohup java -jar *.jar 1> /dev/null 2>&1 &
+            docker rm -f $(docker ps -qa)
+            docker rmi jae518/cicd-aws:latest
+            docker pull jae518/cicd-aws:latest
+            docker-compose up -d
+
 #            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker-compose -f /root/docker-compose.yml down --rmi all'
 #            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker stop cicd-aws || true'
 #            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker rm cicd-aws || true'

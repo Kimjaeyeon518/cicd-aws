@@ -1,20 +1,20 @@
 version: "3"
 services:
-  mysql:
-    image: mysql:latest
+  app:
+    image: jae518/cicd-aws:latest
     ports:
-      - 23306:3306
-    environment:
-      - MYSQL_DATABASE=test
-      - MYSQL_ROOT_PASSWORD=password
+      - "8080:8080"
+    depends_on:
+      - nginx
+      - redis
   redis:
+    hostname: redis
     image: redis:latest
     ports:
-      - 26379:6379
+      - "6379:6379"
   nginx:
     image: nginx:latest
     ports:
       - 80:80
     depends_on:
       - redis
-      - mysql
