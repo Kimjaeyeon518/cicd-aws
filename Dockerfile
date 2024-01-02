@@ -1,11 +1,8 @@
 #FROM ubuntu:latest
 FROM eclipse-temurin:21-jre-alpine
 
-WORKDIR /app
-
-COPY build/libs/cicd-aws-0.0.1-SNAPSHOT.jar /app
-COPY docker-compose.yaml /app
+COPY build/libs/cicd-aws-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "app/cicd-aws-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "/app.jar"]
