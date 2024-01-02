@@ -80,10 +80,11 @@ jobs:
             sudo docker-compose -f docker-compose.yml down --rmi all
             sudo docker pull jae518/cicd-aws:latest
             sudo docker-compose -f docker-compose.yml up -d
+            nohup java -jar *.jar 1> /dev/null 2>&1 &
 #            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker-compose -f /root/docker-compose.yml down --rmi all'
 #            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker stop cicd-aws || true'
 #            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker rm cicd-aws || true'
 #            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker run -d --name cicd-aws -p 8080:8080 jae518/cicd-aws:latest'
 #            kill -9 $(ps -ef | grep java | head -n 1 | awk '{print $2}')
-#            nohup java -jar *.jar 1> /dev/null 2>&1 &
+
       ########## end deploy ##########
