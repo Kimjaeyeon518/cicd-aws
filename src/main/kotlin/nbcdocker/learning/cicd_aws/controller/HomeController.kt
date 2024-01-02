@@ -23,7 +23,7 @@ class HomeController {
 
     @GetMapping("/healthzzz")
     fun healthzz(): String {
-        return "cicd-check!"
+        return "cicd-check-final!"
     }
 
     @GetMapping("/test-cache")
