@@ -45,13 +45,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      #      - name: build and release to DockerHub
-      #        env:
-      #          NAME: ${{ secrets.DOCKER_USERNAME }}
-      #          APP: cicd-aws
-      #        run: |
-      #          docker build -t $NAME/$APP -f ./Dockerfile .
-      #          docker push $NAME/$APP:latest
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
@@ -64,21 +57,6 @@ jobs:
       ########## end build ##########
 
       ########## start deploy ##########
-#      - name: Set permissions for private key
-#        run: |
-#          echo "${{ env.AWS_PRIVATE_KEY }}" > key.pem
-#          chmod 600 key.pem
-#      - name: Pull Docker image
-#        run: |
-#          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker pull your-dockerhub-username/cddemo:latest'
-#      - name: Stop running container
-#        run: |
-#          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker stop cddemo || true'
-#          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker rm cddemo || true'
-#      - name: Run new container
-#        run: |
-#          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker run -d --name cddemo -p 80:3000 your-dockerhub-username/cddemo:latest'
-
       - name: SSH Commands
         uses: appleboy/ssh-action@v0.1.6
         with:
@@ -89,15 +67,6 @@ jobs:
           script_stop: true
           script: |
             docker-compose down
-            docker image rm ${{ secrets.DOCKER_USERNAME }}/cicd-aws:latest
             docker-compose up -d
-
-      #            docker rmi ${{ secrets.DOCKER_USERNAME }}/cicd-aws:latest
-      #            docker pull ${{ secrets.DOCKER_USERNAME }}/cicd-aws:latest
-#            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker-compose -f /root/docker-compose.yml down --rmi all'
-#            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker stop cicd-aws || true'
-#            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker rm cicd-aws || true'
-#            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.167.94.228 'sudo docker run -d --name cicd-aws -p 8080:8080 jae518/cicd-aws:latest'
-#            kill -9 $(ps -ef | grep java | head -n 1 | awk '{print $2}')
-
+#            docker image rm ${{ secrets.DOCKER_USERNAME }}/cicd-aws:latest
       ########## end deploy ##########
