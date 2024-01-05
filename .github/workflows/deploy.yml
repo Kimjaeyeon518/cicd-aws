@@ -57,7 +57,7 @@ jobs:
       ########## end build ##########
 
       ########## start deploy ##########
-      - name: SSH Commands
+      - name: SSH Command
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.SSH_HOST }}
