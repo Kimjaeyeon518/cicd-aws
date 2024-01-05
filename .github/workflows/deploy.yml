@@ -52,8 +52,8 @@ jobs:
           push: true
           dockerfile: ./Dockerfile
           tags: ${{ secrets.DOCKER_USERNAME }}/cicd-aws:latest
-          cache-from: type=gha # 여기서 gha 는 Guthub Actions 용 캐시를 의미합니다.
-          cache-to: type=gha,mode=max
+#          cache-from: type=gha # 여기서 gha 는 Guthub Actions 용 캐시를 의미합니다.
+#          cache-to: type=gha,mode=max
       ########## end build ##########
 
       ########## start deploy ##########
